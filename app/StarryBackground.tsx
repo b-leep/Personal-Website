@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 export default function StarryBackground() {
   const mountRef = useRef<HTMLDivElement>(null);
@@ -26,11 +25,6 @@ export default function StarryBackground() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
     mount.appendChild(renderer.domElement);
-
-    /** 🖱️ Orbit Controls */
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.enableZoom = true;
 
     /** 🌟 Infinite Starfield */
     const starGeometry = new THREE.BufferGeometry();
@@ -127,7 +121,6 @@ export default function StarryBackground() {
         }
       }
 
-      controls.update();
       renderer.render(scene, camera);
     };
 
