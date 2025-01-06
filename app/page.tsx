@@ -1,7 +1,6 @@
 'use client';
 
 import { Typewriter } from 'react-simple-typewriter';
-import Link from 'next/link';
 
 export default function Home() {
   return (

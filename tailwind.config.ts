@@ -26,8 +26,8 @@ export default {
       },
       keyframes: {
         twinkle: {
-          '0%, 100%': { opacity: 0.8 },
-          '50%': { opacity: 1 },
+          '0%, 100%': { opacity: "0.8" },
+          '50%': { opacity: "1" },
         },
         shootingStar: {
           '0%': { transform: 'translate3d(-100vw, -100vh, 0)' },
