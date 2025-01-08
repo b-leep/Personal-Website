@@ -28,7 +28,7 @@ body {
   height: 100%;
   z-index: -1;
   overflow: hidden;
-  background: radial-gradient(circle at bottom, #1a1b2d, #0d0e1a);
+  background: radial-gradient(circle at bottom, #1a1b2d, #050510);
 }
 
 /* Shooting Star Effect */

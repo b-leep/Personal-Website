@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        bluegrey: '#2e2f42',
+        bluegrey: '#050510',
       },
       boxShadow: {
         glow: '0 0 20px 4px rgba(255, 255, 255, 0.8)', // Adds the glow effect
@@ -33,6 +33,10 @@ export default {
           '0%': { transform: 'translate3d(-100vw, -100vh, 0)' },
           '100%': { transform: 'translate3d(100vw, 100vh, 0)' },
         },
+      },
+      fontFamily: {
+        bradley: ['"Bradley Hand ITC"', 'cursive'], // Custom font
+        roboto: ["Roboto", "sans-serif"],
       },
     },
   },
