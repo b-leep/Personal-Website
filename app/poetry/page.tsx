@@ -125,11 +125,13 @@ export default function PoetryPage() {
                       <li
                         key={index}
                         className="hover:text-orange-200 cursor-pointer"
+                        onClick={() => setSelectedPoem(poem.title)} // Ensure selectedPoem is set here
                       >
                         {poem.title}
                       </li>
                     ))}
                   </ul>
+
                 </>
               )}
               <button
