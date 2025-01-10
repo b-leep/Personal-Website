@@ -16,81 +16,84 @@ const PhotographyCarousel = ({ genres, onGenreSelect }: { genres: { genre: strin
   };
 
   return (
-    <motion.div
-      className="w-full h-screen flex flex-col items-center justify-center relative bg-transparent"
-      animate={{
-        y: [0, -10, 0], // Floating effect
-      }}
-      transition={{
-        duration: 3,
-        repeat: Infinity,
-        repeatType: 'mirror',
-      }}
-    >
-      {/* Title */}
-      <h1 className="text-4xl font-bold text-blue-100 mb-10 select-none">Select Genre</h1>
+    <div className="w-full h-screen flex flex-col items-center justify-start mt-10 relative bg-transparent">
+      {/* Static Title */}
+      <h1 className="text-4xl font-bold text-blue-200 mb-10 select-none">Select Genre</h1>
 
-      {/* Left Arrow */}
-      <button
-        onClick={prevGenre}
-        className="absolute left-10 text-yellow-400 text-5xl z-10 hover:scale-125 transition-all"
+      {/* Floating Carousel */}
+      <motion.div
+        className="w-full flex flex-col items-center justify-center relative"
+        animate={{
+          y: [0, -10, 0], // Floating effect
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          repeatType: 'mirror',
+        }}
       >
-        &#9664;
-      </button>
+        {/* Left Arrow */}
+        <button
+          onClick={prevGenre}
+          className="absolute top-40 left-10 transform -translate-y-4 text-gray-400 text-5xl z-10 hover:scale-125 transition-all"
+        >
+          &#9664;
+        </button>
 
-      {/* Carousel Container */}
-      <div className="relative w-128 h-60 flex items-center justify-center">
-        <AnimatePresence>
-          {genres.map((genre, index) => {
-            const isCurrent = index === currentIndex;
-            const isNext = index === (currentIndex + 1) % genres.length;
-            const isPrevious =
-              index === (currentIndex - 1 + genres.length) % genres.length;
+        {/* Carousel Container */}
+        <div className="relative w-128 h-80 flex items-center justify-center">
+          <AnimatePresence>
+            {genres.map((genre, index) => {
+              const isCurrent = index === currentIndex;
+              const isNext = index === (currentIndex + 1) % genres.length;
+              const isPrevious =
+                index === (currentIndex - 1 + genres.length) % genres.length;
 
-            return (
-              <motion.div
-                key={genre.genre}
-                className={`absolute w-96 h-48 flex items-center justify-center rounded-xl backdrop-blur-md bg-white/10 shadow-lg transition-all ${
-                  isCurrent
-                    ? 'z-20 scale-100'
-                    : isNext
-                    ? 'z-10 scale-75 translate-x-40'
-                    : isPrevious
-                    ? 'z-10 scale-75 -translate-x-40'
-                    : 'z-0 scale-50 opacity-0'
-                }`}
-                animate={{
-                  opacity: isCurrent || isNext || isPrevious ? 1 : 0,
-                  scale: isCurrent ? 1.1 : 0.75,
-                  x: isCurrent
-                    ? 0
-                    : isNext
-                    ? 150
-                    : isPrevious
-                    ? -150
-                    : 0,
-                  zIndex: isCurrent ? 20 : isNext || isPrevious ? 10 : 0,
-                }}
-                initial={{ opacity: 0, scale: 0.5 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                transition={{ duration: 0.5 }}
-                onClick={() => onGenreSelect(genre.genre)} // Pass selected genre to parent
-              >
-                <h2 className="text-3xl text-white font-semibold">{genre.genre}</h2>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
+              return (
+                <motion.div
+                  key={genre.genre}
+                  className={`absolute w-96 h-48 flex items-center justify-center rounded-xl backdrop-blur-md bg-white/10 shadow-lg transition-all ${
+                    isCurrent
+                      ? 'z-20 scale-100'
+                      : isNext
+                      ? 'z-10 scale-75 translate-x-40'
+                      : isPrevious
+                      ? 'z-10 scale-75 -translate-x-40'
+                      : 'z-0 scale-50 opacity-0'
+                  }`}
+                  animate={{
+                    opacity: isCurrent || isNext || isPrevious ? 1 : 0,
+                    scale: isCurrent ? 1.1 : 0.75,
+                    x: isCurrent
+                      ? 0
+                      : isNext
+                      ? 150
+                      : isPrevious
+                      ? -150
+                      : 0,
+                    zIndex: isCurrent ? 20 : isNext || isPrevious ? 10 : 0,
+                  }}
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  transition={{ duration: 0.5 }}
+                  onClick={() => onGenreSelect(genre.genre)} // Pass selected genre to parent
+                >
+                  <h2 className="text-3xl text-gray-200 font-semibold">{genre.genre}</h2>
+                </motion.div>
+              );
+            })}
+          </AnimatePresence>
+        </div>
 
-      {/* Right Arrow */}
-      <button
-        onClick={nextGenre}
-        className="absolute right-10 text-yellow-400 text-5xl z-10 hover:scale-125 transition-all"
-      >
-        &#9654;
-      </button>
-    </motion.div>
+        {/* Right Arrow */}
+        <button
+          onClick={nextGenre}
+          className="absolute top-40 right-10 transform -translate-y-4 text-gray-400 text-5xl z-10 hover:scale-125 transition-all"
+        >
+          &#9654;
+        </button>
+      </motion.div>
+    </div>
   );
 };
 
@@ -124,7 +127,7 @@ const PhotographyGenrePage = ({ selectedGenre, onBack }: { selectedGenre: string
   return (
     <div className="w-full h-screen flex flex-col items-center bg-transparent text-white overflow-y-auto">
       <button
-        className="absolute top-4 left-4 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-black rounded-md"
+        className="absolute top-4 left-4 px-4 py-2 bg-orange-200 hover:bg-gray-400 text-black rounded-md"
         onClick={onBack}
       >
         Back
@@ -136,7 +139,7 @@ const PhotographyGenrePage = ({ selectedGenre, onBack }: { selectedGenre: string
             key={index}
             className="relative w-full max-w-4xl flex flex-col items-center"
           >
-            <span className="text-sm text-yellow-400 mb-2">
+            <span className="text-sm text-orange-300 mb-2">
               {photo.date}
             </span>
             <img
