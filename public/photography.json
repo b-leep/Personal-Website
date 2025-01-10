@@ -1,0 +1,29 @@
+[
+  {
+    "images": "/photography/astro1.jpeg",
+    "genre": "Astrophotography",
+    "caption": "Under the Moonlight",
+    "date": "19/07/2024"
+  },
+  {
+    "images": "/photography/land1.jpeg",
+    "genre": "Landscape",
+    "caption": "Urban Aesthetics",
+    "date": "31/12/2024"
+  },
+  {
+    "images": "/photography/macro1.jpeg",
+    "genre": "Macro",
+    "caption": "The Art of Ants",
+    "date": "23/07/2024"
+  },
+  {
+    "images": "/photography/food1.jpeg",
+    "genre": "Food",
+    "caption": "Indulge",
+    "date": "31/12/2024"
+  }
+]
+
+  
+  

@@ -26,22 +26,17 @@ export default function StarryBackground() {
     renderer.setPixelRatio(window.devicePixelRatio);
     mount.appendChild(renderer.domElement);
 
-    /** 🌟 Infinite Starfield */
     const starGeometry = new THREE.BufferGeometry();
     const starCount = 3000;
-    const positions = [];
+    const starPositions = new Float32Array(starCount * 3);
 
-    for (let i = 0; i < starCount; i++) {
-      positions.push(
-        (Math.random() - 0.5) * 2000,
-        (Math.random() - 0.5) * 2000,
-        (Math.random() - 0.5) * 2000
-      );
+    for (let i = 0; i < starCount * 3; i++) {
+      starPositions[i] = (Math.random() - 0.5) * 2000;
     }
 
     starGeometry.setAttribute(
       'position',
-      new THREE.Float32BufferAttribute(positions, 3)
+      new THREE.BufferAttribute(starPositions, 3)
     );
 
     const starMaterial = new THREE.PointsMaterial({
@@ -55,71 +50,40 @@ export default function StarryBackground() {
     const stars = new THREE.Points(starGeometry, starMaterial);
     scene.add(stars);
 
-    /** 🌠 Shooting Star with Glow and Trail */
-    const shootingStarGeometry = new THREE.SphereGeometry(0.1, 8, 8);
-    const shootingStarMaterial = new THREE.MeshBasicMaterial({ color: 0xffd700 });
-    const shootingStar = new THREE.Mesh(shootingStarGeometry, shootingStarMaterial);
+    /** ✨ Swirling Stars */
+    const swirlingGeometry = new THREE.BufferGeometry();
+    const swirlingCount = 2500;
+    const swirlingPositions = new Float32Array(swirlingCount * 3);
 
-    const shootingStarLight = new THREE.PointLight(0xffd700, 2, 5);
-    shootingStar.add(shootingStarLight);
-    scene.add(shootingStar);
+    for (let i = 0; i < swirlingCount * 3; i++) {
+      swirlingPositions[i] = (Math.random() - 0.5) * 10;
+    }
 
-    let shootingStarActive = false;
+    swirlingGeometry.setAttribute(
+      'position',
+      new THREE.BufferAttribute(swirlingPositions, 3)
+    );
 
-    /** ✨ Glow Effect */
-    const glowMaterial = new THREE.SpriteMaterial({
-      map: new THREE.TextureLoader().load('/glow.png'),
-      color: 0xffd700,
+    const swirlingMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.005,
       transparent: true,
       blending: THREE.AdditiveBlending,
     });
 
-    const glow = new THREE.Sprite(glowMaterial);
-    glow.scale.set(1, 1, 1);
-    shootingStar.add(glow);
+    const swirlingStars = new THREE.Points(swirlingGeometry, swirlingMaterial);
+    scene.add(swirlingStars);
 
-    /** 🖱️ Mouse Movement for Interaction */
-    const mouse = { x: 0, y: 0 };
-    document.addEventListener('mousemove', (event) => {
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    });
-
-    /** 🎥 Animate Scene */
-    const clock = new THREE.Clock();
-
+    /** 🎥 Animation Loop */
     const animate = () => {
       requestAnimationFrame(animate);
 
-      const delta = clock.getDelta();
+      // Infinite star field movement
+      stars.rotation.y += 0.0002; // Reduced Y-axis rotation for distant stars
 
-      // Infinite Star Movement
-      stars.rotation.x += 0.0001;
-      stars.rotation.y += 0.0001;
-
-      // Star Field Mouse Interaction
-      stars.rotation.x += (mouse.y * 0.05 - stars.rotation.x) * delta;
-      stars.rotation.y += (mouse.x * 0.05 - stars.rotation.y) * delta;
-
-      // Shooting Star Animation
-      if (!shootingStarActive && Math.random() < 0.002) {
-        shootingStar.position.set(
-          (Math.random() - 0.5) * 20,
-          (Math.random() - 0.5) * 20,
-          -10
-        );
-        shootingStarActive = true;
-      }
-
-      if (shootingStarActive) {
-        shootingStar.position.z += 0.5;
-        shootingStarLight.intensity = 2 + Math.sin(clock.elapsedTime * 10) * 0.5;
-
-        if (shootingStar.position.z > 10) {
-          shootingStarActive = false;
-          shootingStar.position.z = -10;
-        }
-      }
+      // Swirling stars movement
+      swirlingStars.rotation.y += 0.0004; // Reduced Y-axis swirl
+      swirlingStars.rotation.x += 0.0002; // Reduced X-axis swirl
 
       renderer.render(scene, camera);
     };

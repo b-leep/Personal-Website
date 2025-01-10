@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { HiOutlineUserCircle, HiAcademicCap, HiPencil, HiCamera, HiSearch } from "react-icons/hi";
+import { HiHome, HiAcademicCap, HiPencil, HiCamera, HiSearch } from "react-icons/hi";
 import { FaLinkedin, FaMailBulk, FaInstagram } from "react-icons/fa";
 
 export default function Navbar() {
@@ -71,9 +71,9 @@ export default function Navbar() {
 
       {/* Right Section: Navigation Icons */}
       <div className="flex space-x-6">
-        <Link href="/about" className="flex flex-col items-center hover:text-gray-300 transition-colors">
-          <HiOutlineUserCircle className="text-2xl hover:shadow-glow transition-all duration-300" />
-          <span className="text-xs mt-1">About</span>
+        <Link href="/" className="flex flex-col items-center hover:text-gray-300 transition-colors">
+          <HiHome className="text-2xl hover:shadow-glow transition-all duration-300" />
+          <span className="text-xs mt-1">Home</span>
         </Link>
         <Link href="/academics" className="flex flex-col items-center hover:text-gray-300 transition-colors">
           <HiAcademicCap className="text-2xl hover:shadow-glow transition-all duration-300" />
